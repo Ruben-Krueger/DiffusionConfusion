@@ -10,7 +10,7 @@ class Vessel:
         self.blocks = None
         self.target_cells = [] # locations of the target cells
 
-    def generate(self, n_particles: int, seed=None) -> None:
+    def generate(self, n_particles: int, n_targetcells: int, seed=None) -> None:
         """  Creates a new blood vessel, with n_particles of drug. """
         raise NotImplementedError("TODO")
 
