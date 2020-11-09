@@ -32,7 +32,9 @@ class Tissue(Compartment):
 
     def update(self, delta_t):
         self.t += delta_t
-        self.c = (self.c_0 * self.k_b / (self.k_b - self.k_t)) * (np.exp(-self.k_t * self.t) - np.exp(-self.k_b * self.t) )
+        a = (self.c_0 * self.k_b) / (self.k_b - self.k_t)
+        b = np.exp(-self.k_t * self.t) - np.exp(-self.k_b * self.t)
+        self.c = a * b
 
 
 class ArterialBlood(Compartment):
