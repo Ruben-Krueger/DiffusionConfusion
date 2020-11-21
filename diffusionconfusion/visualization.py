@@ -16,7 +16,6 @@ def plot_tissue_diffusion(tissue, iters=100):
         plt.xlabel(f"Iteration {i}")
         plt.pause(0.1)
         tissue.update(1)
-     
 
 def plot_convergence(name, params, C_0, K_B, K_T, iters=1000):
     results = {}

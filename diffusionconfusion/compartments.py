@@ -38,7 +38,7 @@ class Tissue:
         a = (self.c_0 * self.k_b) / (self.k_b - self.k_t)
         if self.diseases:
             # b = np.exp(-self.k_t * self.t) - np.exp(-self.k_b * self.t) * np.log(self.c_0 * self.diseases["hr"] *  self.diseases["bp"] + 1)
-            b = np.exp(-self.k_t * self.t) - np.exp(-self.k_b * self.t) + np.log(self.c_0 * self.diseases["hr"] *  self.diseases["bp"] )
+            b = np.exp(-self.k_t * self.t) - np.exp(-self.k_b * self.t) + np.log(self.c_0 * self.diseases["hr"] * self.diseases["bp"])
         else: 
             b = np.exp(-self.k_t * self.t) - np.exp(-self.k_b * self.t)   
 
@@ -96,7 +96,7 @@ class ArterialBlood:
     def update(self, delta_t=1):
         self.t += delta_t
         if self.diseases:
-            self.c = np.log(self.c * self.diseases["hr"] *  self.diseases["bp"] ) * self.c_0 + self.diseases["permeability"] * self.c_0 * np.exp(-self.k_b * self.t)
+            self.c = np.log(self.c * self.diseases["hr"] * self.diseases["bp"]) * self.c_0 + self.diseases["permeability"] * self.c_0 * np.exp(-self.k_b * self.t) - self.t * np.exp(-self.k_b)
             # self.c = np.log(self.c * self.diseases["hr"] *  self.diseases["bp"] + 1) * self.c_0 * np.exp(-self.k_b * self.t)
         else:
             self.c = self.c_0 * np.exp(-self.k_b * self.t)
@@ -124,6 +124,6 @@ class VenousBlood:
         c = np.exp(-self.k_e * self.t) / ((self.k_e - self.k_t) * (self.k_e - self.k_b))
         if self.diseases:   
             # self.c = np.log(self.c_0 * self.diseases["hr"] *  self.diseases["bp"] + 1) * self.c_0 * self.k_t * self.k_b * (a - b + c)
-            self.c = np.log(self.c_0 * self.diseases["hr"] *  self.diseases["bp"]) + self.diseases["permeability"] * self.c_0 * self.k_t * self.k_b * (a - b + c)
+            self.c = np.log(self.c_0 * self.diseases["hr"] * self.diseases["bp"]) + self.diseases["permeability"] * self.c_0 * self.k_t * self.k_b * (a - b + c)
         else:        
             self.c = self.c_0 * self.k_t * self.k_b * (a - b + c)
