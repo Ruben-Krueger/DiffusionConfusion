@@ -19,8 +19,6 @@ class Tissue():
     def grid(self):
         return np.random.rand(self.nX, self.nY)
 
-    # a = a * (s/ a.sum()) where s is the desired sum
-
     def update(self, delta_t):
         self.t += delta_t
         a = (self.c_0 * self.k_b) / (self.k_b - self.k_t)
